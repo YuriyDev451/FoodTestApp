@@ -1,13 +1,16 @@
 package com.example.example
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 
+@Parcelize
 data class Categories (
 
-  @SerializedName("idCategory"             ) var idCategory             : String? = null,
-  @SerializedName("strCategory"            ) var strCategory            : String? = null,
-  @SerializedName("strCategoryThumb"       ) var strCategoryThumb       : String? = null,
-  @SerializedName("strCategoryDescription" ) var strCategoryDescription : String? = null
+   var idCategory             : String? = null,
+   var strCategory            : String? = null,
+   var strCategoryThumb       : String? = null,
+   var strCategoryDescription : String? = null
 
-)
+):Parcelable
