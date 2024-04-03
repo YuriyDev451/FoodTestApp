@@ -1,7 +1,7 @@
 package com.gukunov.foodtestapp.di
 
 import com.gukunov.foodtestapp.data.searchRepository.SearchRepositoryInterface
-import com.gukunov.foodtestapp.domain.GetSearchListUseCase
+import com.gukunov.foodtestapp.domain.useCase.GetSearchListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,7 +1,7 @@
 package com.gukunov.foodtestapp.data.searchRepository
 
-import com.example.example.SearchResponse
+import com.example.example.MealsResponse
 
 interface SearchRepositoryInterface {
-    suspend fun getSearchList(): SearchResponse?
+    suspend fun getSearchList(): MealsResponse?
 }

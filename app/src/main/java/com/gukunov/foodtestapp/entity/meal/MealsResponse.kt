@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SearchResponse (
+data class MealsResponse (
 
   var meals : ArrayList<Meals> = arrayListOf()
 

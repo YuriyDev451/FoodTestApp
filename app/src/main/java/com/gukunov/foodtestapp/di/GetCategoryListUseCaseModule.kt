@@ -1,7 +1,7 @@
 package com.gukunov.foodtestapp.di
 
 import com.gukunov.foodtestapp.data.categoryRepository.CategoryRepositoryInterface
-import com.gukunov.foodtestapp.domain.GetCategoryListUseCase
+import com.gukunov.foodtestapp.domain.useCase.GetCategoryListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

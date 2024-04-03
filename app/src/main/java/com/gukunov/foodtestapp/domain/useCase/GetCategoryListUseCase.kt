@@ -1,4 +1,4 @@
-package com.gukunov.foodtestapp.domain
+package com.gukunov.foodtestapp.domain.useCase
 
 import com.gukunov.foodtestapp.common.Resource
 import com.gukunov.foodtestapp.data.categoryRepository.CategoryRepositoryInterface
