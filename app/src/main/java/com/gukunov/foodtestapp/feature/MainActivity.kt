@@ -1,8 +1,12 @@
-package com.gukunov.foodtestapp
+package com.gukunov.foodtestapp.feature
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.gukunov.foodtestapp.R
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

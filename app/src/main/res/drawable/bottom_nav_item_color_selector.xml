@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Состояние выбранного элемента -->
+    <item android:color="#FD3A69" android:state_checked="true" />
+    <!-- Состояние невыбранного элемента -->
+    <item android:color="@android:color/black" />
+</selector>

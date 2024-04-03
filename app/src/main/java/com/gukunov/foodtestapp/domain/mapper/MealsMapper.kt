@@ -34,5 +34,4 @@ class MealsMapper : BaseMapper<Meals, MealsUIModel> {
         strIngredient20 = input.strIngredient20 ?: ""
     )
 
-
 }
