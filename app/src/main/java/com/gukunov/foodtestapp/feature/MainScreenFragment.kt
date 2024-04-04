@@ -6,14 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.gukunov.foodtestapp.R
 import com.gukunov.foodtestapp.databinding.FragmentMainScreenBinding
 import com.gukunov.foodtestapp.entity.BannerImage
 import com.gukunov.foodtestapp.feature.adapter.BannerAdapter
+import com.gukunov.foodtestapp.feature.adapter.MealsAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.WithFragmentBindings
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -21,6 +24,8 @@ class MainScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentMainScreenBinding
     private lateinit var adapter: BannerAdapter
+    private lateinit var mealsAdapter: MealsAdapter
+    private val viewModel: MainScreenViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,28 +45,66 @@ class MainScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecyclerAdapter()
+        initBannerRecyclerAdapter()
 
 
-        val tab1 = binding.tabLayout.newTab().setText("Пицца")
-        val tab2 = binding.tabLayout.newTab().setText("Комбо")
-        val tab3 = binding.tabLayout.newTab().setText("Десерты")
+        viewModel.categoryData.observe(viewLifecycleOwner){
+            for (category in it.categories) {
+                val tab = binding.tabLayout.newTab().setText(category.strCategory) // Предположим, что категория имеет свойство "name"
+                binding.tabLayout.addTab(tab)
 
-        binding.tabLayout.addTab(tab1)
-        binding.tabLayout.addTab(tab2)
-        binding.tabLayout.addTab(tab3)
-
-        for (i in 0..3 ){
-            val textView = LayoutInflater.from(requireContext()).inflate(R.layout.tab_title, null)
-            as TextView
-            binding.tabLayout.getTabAt(i)?.customView = textView
+            }
+            for (i in 0..it.categories.size ){
+                val textView = LayoutInflater.from(requireContext()).inflate(R.layout.tab_title, null)
+                        as TextView
+                binding.tabLayout.getTabAt(i)?.customView = textView
+            }
         }
+
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.let {
+                    val selectedCategory = viewModel.categoryData.value?.categories?.get(it.position)?.strCategory
+                    selectedCategory?.let { category ->
+                        viewModel.filterMealsByCategory(category)
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
+
+
+
+
+
+        initMealRecyclerAdapter()
+//        lifecycleScope.launch {
+//            viewModel.getMeals()
+//        }
+        lifecycleScope.launch {
+            viewModel.getCategories()
+        }
+
+
+        viewModel.filteredData.observe(viewLifecycleOwner) {
+            mealsAdapter.setData(it)
+        }
+
 
     }
 
-    fun initRecyclerAdapter() {
+    fun initBannerRecyclerAdapter() {
         adapter = BannerAdapter(list)
         binding.horizontalRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.horizontalRecyclerView.adapter = adapter
+    }
+
+    fun initMealRecyclerAdapter() {
+        mealsAdapter = MealsAdapter()
+        binding.mealList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.mealList.adapter = mealsAdapter
     }
 }
