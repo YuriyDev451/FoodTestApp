@@ -28,5 +28,25 @@
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            app:tabMode="scrollable"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="0dp"
+            android:background="@drawable/tab_background"
+             />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mealList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </com.google.android.material.appbar.AppBarLayout>
+
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
