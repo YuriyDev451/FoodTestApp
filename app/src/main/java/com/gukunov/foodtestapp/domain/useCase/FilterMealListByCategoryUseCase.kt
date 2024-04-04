@@ -16,22 +16,10 @@ class FilterMealListByCategoryUseCase@Inject constructor(
         val filteredList = searchRepositoryInterface.getSearchList()?.meals?.filter { item ->
             item.strCategory == category
         }
-        filteredList?.let {
-            emit(Resource.Success(it))
-        } ?: emit(Resource.Error("Error"))
+
         filteredList?.let {
             emit(Resource.Success(it))
         } ?: emit(Resource.Error("Error"))
     }
 
-//    suspend fun filterMealsByCategory(category: String): Flow<Resource<List<Meals>>> = flow {
-//        emit(Resource.Loading())
-//        val meals = searchRepositoryInterface.getSearchList()
-//        if (meals != null) {
-//            val filteredMeals = meals.meals.filter { meal -> meal.strCategory == category }
-//            emit(Resource.Success(filteredMeals))
-//        } else {
-//            emit(Resource.Error("Error filtering meals by category"))
-//        }
-//    }
 }

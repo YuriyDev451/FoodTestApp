@@ -1,5 +1,6 @@
 package com.gukunov.foodtestapp.di
 
+import android.app.Application
 import com.google.gson.Gson
 import com.gukunov.foodtestapp.network.CategoryService
 import com.gukunov.foodtestapp.network.SearchService
@@ -12,6 +13,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import okhttp3.Cache
+
 
 
 @Module
@@ -27,9 +30,15 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient() :OkHttpClient{
+
+    fun provideOkHttpClient(application: Application) :OkHttpClient{
+        val cacheSize = (5 * 1024 * 1024).toLong() // 5 MB
+        val cache = Cache(application.cacheDir, cacheSize)
+
         val client = OkHttpClient.Builder()
-        client.connectTimeout(60, TimeUnit.SECONDS)
+        client
+            .cache(cache)
+            .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
         return client.build()

@@ -35,24 +35,6 @@ class MainScreenViewModel @Inject constructor(
     val categoryData = MutableLiveData<CategoriesUIState>()
 
 
-//    suspend fun getMeals() {
-//        getSearchListUseCase.getSearchList().collectLatest {list ->
-//
-//            when(list){
-//                is Resource.Error -> state.emit(State.error(list.message))
-//                is Resource.Loading -> state.emit(State.loading())
-//                is Resource.Success -> {
-//                    state.emit(State.success())
-//                    list.data.let {
-//                        val mapData = mealsMapper.transform(it)
-//                        data.postValue(mapData)
-//                    }
-//
-//                }
-//            }
-//        }
-//    }
-
     fun filterMealsByCategory(category: String) {
         viewModelScope.launch {
             filterMealListByCategoryUseCase.filterMealListByCategory(category).collect { resource ->

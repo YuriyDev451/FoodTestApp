@@ -81,9 +81,7 @@ class MainScreenFragment : Fragment() {
 
 
         initMealRecyclerAdapter()
-//        lifecycleScope.launch {
-//            viewModel.getMeals()
-//        }
+
         lifecycleScope.launch {
             viewModel.getCategories()
         }
