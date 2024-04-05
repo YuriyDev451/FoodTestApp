@@ -48,10 +48,9 @@ class NetworkModule {
     @Singleton
     fun provideApiClient(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         val retrofit = Retrofit.Builder()
-        retrofit.baseUrl("https://themealdb.com/api/json/v1/1/")
+        retrofit.baseUrl("https://themealdb.com/api/json/v1/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
-            .build()
 
         return retrofit.build()
     }

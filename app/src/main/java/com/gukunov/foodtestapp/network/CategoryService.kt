@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface CategoryService {
 
-    @GET("categories.php")
+    @GET("1/categories.php")
     suspend fun getCategory(): CategoriesResponse?
 }

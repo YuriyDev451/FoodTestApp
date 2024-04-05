@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface SearchService {
 
-    @GET("search.php?s")
+    @GET("1/search.php?s")
     suspend fun getSearch():MealsResponse?
 }
