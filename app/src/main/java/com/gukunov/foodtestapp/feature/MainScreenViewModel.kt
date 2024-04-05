@@ -1,5 +1,7 @@
 package com.gukunov.foodtestapp.feature
 
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -66,8 +68,11 @@ class MainScreenViewModel @Inject constructor(
                     }
                 }
 
+
             }
         }
     }
+
+
 
 }
